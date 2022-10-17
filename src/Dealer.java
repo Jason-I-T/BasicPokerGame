@@ -13,7 +13,7 @@ public class Dealer {
 
 	public Dealer() {
 		//TODO:
-		/* Create the deck (4 suits, A, 2-10, J, Q, K) <<<<<
+		/*
 		 * Implement the card dealing (Choose 15 at random)
 		 */	
 		this.deck = deckInit();
