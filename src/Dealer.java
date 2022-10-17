@@ -27,11 +27,17 @@ public class Dealer {
 		int n = 0;
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 13; j++) {
-				n++;	
 				map.put(n, new int[] {i, j});
+				n++;	
 			}	
 		}
 
 		return map;
+	}
+
+	public void printDeck() {
+		this.deck.forEach((n, c) -> {
+			System.out.printf("Card %d: %d %d\n", n, c[0], c[1]);
+		});
 	}
 }
