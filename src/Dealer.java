@@ -10,8 +10,7 @@ public class Dealer {
 	public Dealer() {
 		//TODO:
 		/* Create the deck (4 suits, A, 2-10, J, Q, K)
-		 * Implement a shuffle
-		 * Implement the card dealing
+		 * Implement the card dealing (Choose 15 at random)
 		 */	
 	}
 }
