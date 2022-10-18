@@ -7,32 +7,28 @@
  */
 import java.util.HashMap;
 import java.lang.Integer;
+//import java.lang.Math;
 
 public class Dealer {
 	private HashMap<Integer, int[]> deck;
 
 	public Dealer() {
 		//TODO:
-		/*
-		 * Implement the card dealing (Choose 15 at random)
+		/* Redo creating the cards we play with
+		 * Implement the card dealing
 		 */	
 		this.deck = deckInit();
 	}
 
 	// Create new deck
 	private HashMap<Integer, int[]> deckInit() {
-		HashMap<Integer, int[]> map = new HashMap<Integer, int[]>();
-
-		// 4 suits x 13 cards
-		int n = 0;
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 13; j++) {
-				map.put(n, new int[] {i, j});
-				n++;	
-			}	
-		}
-
-		return map;
+		HashMap<Integer, int[]> cards = new HashMap<Integer, int[]>();
+		for(int i = 0; i < 15; i++) {
+			int suit = (int)((Math.random() * 1000) % 4);
+			int rank = (int)((Math.random() * 1000) % 13);	
+			cards.put(i, new int[] {suit, rank});
+		}	
+		return cards;
 	}
 
 	public void printDeck() {
