@@ -31,19 +31,28 @@ public class Dealer {
 			int suit = (int)((Math.random() * 1000) % 4);
 			int rank = (int)((Math.random() * 1000) % 13);	
 			int[] temp = {suit, rank};
-			//If card doesn't exist add to map
 			if(!isCopy(cards, temp)) {
 				cards.put(i, temp);	
 				i++;
 			} 
-		}while(i < 15);	
+		} while(i < 15);	
 
 		return cards;
 	}
 
-	/*
-	private Stack<Integer> handInit(HashMap<Integer, int[]> deck) {
-		
+	// Used to ensure the deck will not have copies...deckInit()
+	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
+		for(int[] pair: map.values())
+			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
+				return true; 	
+
+		return false;	
+	}
+
+	// TODO
+	/* 
+	private Stack<Integer> handInit() {
+				
 	}
 
 	private Queue<Integer> riverInit() {
@@ -51,23 +60,9 @@ public class Dealer {
 	}
 	*/
 
-	// Used to ensure the deck will not have copies...deckInit()
-	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
-		Collection<int[]> vals = map.values();
-		ArrayList<int[]> valuePairs = new ArrayList<int[]>(vals);
-
-		for(int i = 0; i < valuePairs.size(); i++) {
-			int[] oldEntry = valuePairs.get(i);
-			if(oldEntry[0]==newEntry[0] && oldEntry[1]==newEntry[1])
-				return true;	
-		}
-
-		return false;	
-	}
-
 	/**********************************************************************
 	 **********************************************************************
-	 **********************************************************************
+	 ***********************DEBUGGING**FUNCTIONS***************************
 	 **********************************************************************
 	 **********************************************************************/
 
