@@ -6,12 +6,14 @@
  */
 
 import java.util.HashMap;
-import java.util.Collection;
-import java.util.ArrayList;
+import java.util.LinkedList;
+
 import java.lang.Integer;
 
 public class Dealer {
 	private HashMap<Integer, int[]> deck;
+	private LinkedList<int[]> cardsForPlayers;
+	private LinkedList<int[]> cardsForRiver;
 
 	public Dealer() {
 		/*TODO:
@@ -19,6 +21,7 @@ public class Dealer {
 		 * 	Implement a way to reveal the river after each stage	
 		 */	
 		this.deck = deckInit();
+		dealInit(this.deck);
 	}
 
 	// Create new deck
@@ -50,15 +53,26 @@ public class Dealer {
 	}
 
 	// TODO
-	/* 
-	private Stack<Integer> handInit() {
-				
-	}
+	private void dealInit(HashMap<Integer, int[]> deck) {
+		/*
+		Iterate over the map 'deck', push the first 10 values to the
+		linkedlist 'handCards'.	
+			> We will use this linkedlist for dealing to the players
+			> Emptied once cards are dealt. Maybe a way to 
+			  include the river cards here too?
+		*/
+		LinkedList<int[]> handCards = new LinkedList<int[]>();				
+		LinkedList<int[]> riverCards = new LinkedList<int[]>();				
 
-	private Queue<Integer> riverInit() {
-	
+		for(int i = 0; i < 10; i++)
+			handCards.add(deck.get(i));	
+		for(int j = 10; j < deck.size(); j++)
+			riverCards.add(deck.get(j));	
+
+
+		this.cardsForPlayers = handCards;
+		this.cardsForRiver = riverCards;
 	}
-	*/
 
 	/**********************************************************************
 	 **********************************************************************
@@ -69,6 +83,18 @@ public class Dealer {
 	public void printDeck() {
 		this.deck.forEach((n, c) -> {
 			System.out.printf("Card %d: %d %d\n", n, c[0], c[1]);
+		});
+	}
+
+	public void printHandCards() {
+		this.cardsForPlayers.forEach((h) -> {
+			System.out.printf("Hand %d %d\n", h[0], h[1]);
+		});
+
+	}
+	public void printRiverCards() {
+		this.cardsForRiver.forEach((r) -> {
+			System.out.printf("River %d %d\n", r[0], r[1]);
 		});
 	}
 }
