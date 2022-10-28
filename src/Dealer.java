@@ -6,6 +6,7 @@
  */
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import java.lang.Integer;
@@ -26,7 +27,7 @@ public class Dealer {
 
 	// Create new deck
 	private HashMap<Integer, int[]> deckInit() {
-		HashMap<Integer, int[]> cards = new HashMap<Integer, int[]>();
+		HashMap<Integer, int[]> cards = new HashMap<>();
 		
 		// Uniquely picking a random cards until we have 15 (hand+river)
 		int i = 0;
@@ -52,7 +53,7 @@ public class Dealer {
 		return false;	
 	}
 
-	// TODO
+	// TODO //
 	private void dealInit(HashMap<Integer, int[]> deck) {
 		/*
 		Iterate over the map 'deck', push the first 10 values to the
@@ -61,8 +62,8 @@ public class Dealer {
 			> Emptied once cards are dealt. Maybe a way to 
 			  include the river cards here too?
 		*/
-		LinkedList<int[]> handCards = new LinkedList<int[]>();				
-		LinkedList<int[]> riverCards = new LinkedList<int[]>();				
+		LinkedList<int[]> handCards = new LinkedList<>();				
+		LinkedList<int[]> riverCards = new LinkedList<>();				
 
 		for(int i = 0; i < 10; i++)
 			handCards.add(deck.get(i));	
@@ -72,6 +73,38 @@ public class Dealer {
 
 		this.cardsForPlayers = handCards;
 		this.cardsForRiver = riverCards;
+	}
+
+	/*
+	 *	Deal to hands... we can think of a hands as a 2D array, where
+	 *	h = {{suit_0, rank_0}, {suit_1, rank_1}, ... {suit_n, rank_n}}
+	 *	In poker, the dealer deals only two cards to each player in
+	 *	the beginning.
+	 *	In the dealer class, we have a function to return 5 hands with
+	 *	2 cards each to the players as our only 'real' deal...
+	 *
+	 *	As for the river, it seems like we need to think a bit ahead.
+	 *	Say the players keep track of their cards using an linkedlist
+	 *	... when the river gets revealed, add the new suit_i, rank_i entry
+	 *	to the linkedlist...
+	 *
+	 *	the deal function in the dealer returns an array of linked list.
+	 *	Players will "pick up" these cards in the main class (probably)
+	 *
+	 */
+
+	// card dealing. returns arraylist containing the hands of players 1 - 5.
+	public ArrayList<LinkedList<int[]>> getPlayerHands(){
+		ArrayList<LinkedList<int[]>> hands = new ArrayList<>();
+
+		while(this.cardsForPlayers.size() > 0) {
+			LinkedList<int[]> newHand = new LinkedList<int[]>();
+			newHand.add(this.cardsForPlayers.poll());
+			newHand.add(this.cardsForPlayers.poll());
+			hands.add(newHand);
+		}
+
+		return hands;
 	}
 
 	/**********************************************************************
