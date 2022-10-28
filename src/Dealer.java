@@ -44,7 +44,7 @@ public class Dealer {
 		return cards;
 	}
 
-	// Used to ensure the deck will not have copies...deckInit()
+	// used to ensure the deck will not have copies in deckInit()
 	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
 		for(int[] pair: map.values())
 			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
@@ -53,15 +53,8 @@ public class Dealer {
 		return false;	
 	}
 
-	// TODO //
+	// get cards ready to be dealt
 	private void dealInit(HashMap<Integer, int[]> deck) {
-		/*
-		Iterate over the map 'deck', push the first 10 values to the
-		linkedlist 'handCards'.	
-			> We will use this linkedlist for dealing to the players
-			> Emptied once cards are dealt. Maybe a way to 
-			  include the river cards here too?
-		*/
 		LinkedList<int[]> handCards = new LinkedList<>();				
 		LinkedList<int[]> riverCards = new LinkedList<>();				
 
@@ -74,24 +67,6 @@ public class Dealer {
 		this.cardsForPlayers = handCards;
 		this.cardsForRiver = riverCards;
 	}
-
-	/*
-	 *	Deal to hands... we can think of a hands as a 2D array, where
-	 *	h = {{suit_0, rank_0}, {suit_1, rank_1}, ... {suit_n, rank_n}}
-	 *	In poker, the dealer deals only two cards to each player in
-	 *	the beginning.
-	 *	In the dealer class, we have a function to return 5 hands with
-	 *	2 cards each to the players as our only 'real' deal...
-	 *
-	 *	As for the river, it seems like we need to think a bit ahead.
-	 *	Say the players keep track of their cards using an linkedlist
-	 *	... when the river gets revealed, add the new suit_i, rank_i entry
-	 *	to the linkedlist...
-	 *
-	 *	the deal function in the dealer returns an array of linked list.
-	 *	Players will "pick up" these cards in the main class (probably)
-	 *
-	 */
 
 	// card dealing. returns arraylist containing the hands of players 1 - 5.
 	public ArrayList<LinkedList<int[]>> getPlayerHands(){
