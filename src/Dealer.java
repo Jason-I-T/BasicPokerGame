@@ -15,10 +15,10 @@ public class Dealer {
 	private HashMap<Integer, int[]> deck;
 	private LinkedList<int[]> cardsForPlayers;
 	private LinkedList<int[]> cardsForRiver;
+	private ArrayList<LinkedList<int[]>> playerHands;
 
 	public Dealer() {
 		/*TODO:
-		 * 	Implement improvements(?) to code
 		 * 	Implement dealing to the river
 		 * 		> find a way to reveal the river after each stage
 		 * 		> ... the dealer or the game will reveal the river
@@ -27,6 +27,7 @@ public class Dealer {
 		 */	
 		this.deck = deckInit();
 		dealInit(this.deck);
+		this.playerHands = handsInit(this.cardsForPlayers);
 	}
 
 	// Create new deck
@@ -48,14 +49,7 @@ public class Dealer {
 		return cards;
 	}
 
-	// used to ensure the deck will not have copies in deckInit()
-	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
-		for(int[] pair: map.values())
-			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
-				return true; 	
-
-		return false;	
-	}
+	
 
 	// get cards ready to be dealt
 	private void dealInit(HashMap<Integer, int[]> deck) {
@@ -71,28 +65,31 @@ public class Dealer {
 		this.cardsForRiver = riverCards;
 	}
 
-	// card dealing. returns arraylist containing the hands of players 1 - 5.
-	/* TODO - Rename function, misleading.. something like 'handsInit' or 
-	 *	  whatever
-	 */
-	public ArrayList<LinkedList<int[]>> getPlayerHands(){
+	// dealing to players. returns arraylist w the hands of players 1 - 5.
+	private ArrayList<LinkedList<int[]>> handsInit(LinkedList<int[]> cards){
 		ArrayList<LinkedList<int[]>> hands = new ArrayList<>();
 
-		while(this.cardsForPlayers.size() > 0) {
+		while(cards.size() > 0) {
 			LinkedList<int[]> newHand = new LinkedList<int[]>();
-			newHand.add(this.cardsForPlayers.poll());
-			newHand.add(this.cardsForPlayers.poll());
+			newHand.add(cards.poll());
+			newHand.add(cards.poll());
 			hands.add(newHand);
 		}
 
 		return hands;
 	}
 
-	/* TODO - Implement a getter for the player hands. Change function on
-	 *	  line 78, and add a datafield for player hands to accommodate 
-	 *	  the change.
-	 */
-	// public ArrayList<LinkedList<int[]>> getHands() { return this.hands; }
+	// used to ensure the deck will not have copies in deckInit()
+	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
+		for(int[] pair: map.values())
+			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
+				return true; 	
+
+		return false;	
+	}
+
+	// GETTERS //
+	public ArrayList<LinkedList<int[]>> getPlayerHands() { return this.playerHands; }
 
 	/**********************************************************************
 	 **********************************************************************
