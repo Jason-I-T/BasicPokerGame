@@ -18,14 +18,22 @@ public class Dealer {
 
 	public Dealer() {
 		/*TODO:
-		 * 	Implement dealing to players and the river
-		 * 	Implement a way to reveal the river after each stage	
+		 * 	Implement improvements(?) to code
+		 * 	Implement dealing to the river
+		 * 		> find a way to reveal the river after each stage
+		 * 		> ... the dealer or the game will reveal the river
+		 * 		  to the players.. either way; need a function to
+		 * 		  
 		 */	
 		this.deck = deckInit();
 		dealInit(this.deck);
 	}
 
 	// Create new deck
+	/* TODO: Try using the property of a set to improve the efficiency of
+	 * 	 this function. Having to check for copies every iteration feels
+	 * 	 dirty.
+	 */
 	private HashMap<Integer, int[]> deckInit() {
 		HashMap<Integer, int[]> cards = new HashMap<>();
 		
@@ -45,6 +53,7 @@ public class Dealer {
 	}
 
 	// used to ensure the deck will not have copies in deckInit()
+	// TODO: Find a way to get rid of this
 	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
 		for(int[] pair: map.values())
 			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
@@ -55,20 +64,22 @@ public class Dealer {
 
 	// get cards ready to be dealt
 	private void dealInit(HashMap<Integer, int[]> deck) {
-		LinkedList<int[]> handCards = new LinkedList<>();				
-		LinkedList<int[]> riverCards = new LinkedList<>();				
+		LinkedList<int[]> handCards = new LinkedList<>();
+		LinkedList<int[]> riverCards = new LinkedList<>();
 
 		for(int i = 0; i < 10; i++)
-			handCards.add(deck.get(i));	
+			handCards.add(deck.get(i));
 		for(int j = 10; j < deck.size(); j++)
-			riverCards.add(deck.get(j));	
-
+			riverCards.add(deck.get(j));
 
 		this.cardsForPlayers = handCards;
 		this.cardsForRiver = riverCards;
 	}
 
 	// card dealing. returns arraylist containing the hands of players 1 - 5.
+	/* TODO - Rename function, misleading.. something like 'handsInit' or 
+	 *	  whatever
+	 */
 	public ArrayList<LinkedList<int[]>> getPlayerHands(){
 		ArrayList<LinkedList<int[]>> hands = new ArrayList<>();
 
@@ -81,6 +92,12 @@ public class Dealer {
 
 		return hands;
 	}
+
+	/* TODO - Implement a getter for the player hands. Change function on
+	 *	  line 78, and add a datafield for player hands to accommodate 
+	 *	  the change.
+	 */
+	// public ArrayList<LinkedList<int[]>> getHands() { return this.hands; }
 
 	/**********************************************************************
 	 **********************************************************************
