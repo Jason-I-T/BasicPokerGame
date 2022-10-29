@@ -19,11 +19,7 @@ public class Dealer {
 
 	public Dealer() {
 		/*TODO:
-		 * 	Implement dealing to the river
-		 * 		> find a way to reveal the river after each stage
-		 * 		> ... the dealer or the game will reveal the river
-		 * 		  to the players.. either way; need a function to
-		 * 		  
+		 * 
 		 */	
 		this.deck = deckInit();
 		dealInit(this.deck);
@@ -48,8 +44,6 @@ public class Dealer {
 
 		return cards;
 	}
-
-	
 
 	// get cards ready to be dealt
 	private void dealInit(HashMap<Integer, int[]> deck) {
@@ -91,12 +85,24 @@ public class Dealer {
 	// GETTERS //
 	public ArrayList<LinkedList<int[]>> getPlayerHands() { return this.playerHands; }
 
+	/* River implementation... current idea- 
+	 *     > deal the river to the game, rather than the players.
+	 * 	 Game will have some kind of system in place to progress stages
+	 *	 We will call the getRiver function for however many times we 
+	 *	 need to show the river.. This is determined by the game, dealer
+	 *	 simply reveals a card when asked to. 
+	 */
+	public int[] getRiver() { 
+		if(!this.cardsForRiver.isEmpty()) 
+			return this.cardsForRiver.poll(); 
+		return new int[] {-1, -1};
+	}
+
 	/**********************************************************************
 	 **********************************************************************
 	 ***********************DEBUGGING**FUNCTIONS***************************
 	 **********************************************************************
 	 **********************************************************************/
-
 	public void printDeck() {
 		this.deck.forEach((n, c) -> {
 			System.out.printf("Card %d: %d %d\n", n, c[0], c[1]);
