@@ -30,10 +30,6 @@ public class Dealer {
 	}
 
 	// Create new deck
-	/* TODO: Try using the property of a set to improve the efficiency of
-	 * 	 this function. Having to check for copies every iteration feels
-	 * 	 dirty.
-	 */
 	private HashMap<Integer, int[]> deckInit() {
 		HashMap<Integer, int[]> cards = new HashMap<>();
 		
@@ -53,7 +49,6 @@ public class Dealer {
 	}
 
 	// used to ensure the deck will not have copies in deckInit()
-	// TODO: Find a way to get rid of this
 	private boolean isCopy(HashMap<Integer, int[]> map, int[] newEntry){
 		for(int[] pair: map.values())
 			if(pair[0]==newEntry[0] && pair[1]==newEntry[1])
