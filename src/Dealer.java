@@ -120,4 +120,15 @@ public class Dealer {
 			System.out.printf("River %d %d\n", r[0], r[1]);
 		});
 	}
+
+	public void printPlayerHands() {
+		for(int i = 0; i < this.playerHands.size(); i++) {
+			LinkedList<int[]> hand = this.playerHands.get(i);	
+			while(!hand.isEmpty()) {
+				int[] tmp = hand.poll();
+				System.out.printf("  %d, %d  ", tmp[0], tmp[1]);					
+			}
+			System.out.println("\n------------------");
+		}	
+	}
 }
