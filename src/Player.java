@@ -16,4 +16,15 @@ public class Player {
 	}
 
 	public LinkedList<int[]> getHand() { return this.hand; }
+
+	////////////////////////////////////////////////////////////////////////
+	////////////////////////////DEBUGGING METHODS///////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	
+	public void printHand() {
+		for(int[] cards: this.hand) {
+			System.out.printf("| %d, %d |", cards[0], cards[1]);		
+		}	
+		System.out.println("\n---------------------");
+	}
 }
