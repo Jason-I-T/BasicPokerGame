@@ -19,7 +19,8 @@ public class Dealer {
 
 	public Dealer() {
 		/*TODO:
-		 * 
+		 *  Implement a way for the dealer to initialize the cards
+		 *  after every round.
 		 */	
 		this.deck = deckInit();
 		dealInit(this.deck);

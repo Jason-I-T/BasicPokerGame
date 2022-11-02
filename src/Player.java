@@ -9,6 +9,9 @@
 import java.util.LinkedList;
 
 public class Player {
+	/* TODO
+	 * 	Implement a datafield handvalue and make a getter/setter for it
+	 */
 	private LinkedList<int[]> hand;
 
 	public Player(LinkedList<int[]> hand) {
